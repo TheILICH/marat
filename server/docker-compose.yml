@@ -13,6 +13,8 @@ services:
 
   admin:
     image: theilich/admin:latest
+    ports:
+      - 8080:8080
     depends_on:
       - server
     networks:
@@ -20,6 +22,8 @@ services:
 
   teacher:
     image: theilich/teacher:latest
+    ports:
+      - 8081:8081
     depends_on:
       - server
     networks:
