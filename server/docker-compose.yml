@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  server:
+    image: theilich/server:latest
+    ports:
+      - 50051:50051
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+    networks:
+      - grpc
+
+  admin:
+    image: theilich/admin:latest
+    depends_on:
+      - server
+    networks:
+      - grpc
+
+  teacher:
+    image: theilich/teacher:latest
+    depends_on:
+      - server
+    networks:
+      - grpc
+
+  db:
+    image: postgres:16.2-alpine3.19
+    ports:
+      - 5432:5432
+    env_file:
+      - ./.env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - grpc
+
+networks:
+  grpc:
+
+volumes:
+  db_data:
