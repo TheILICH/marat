@@ -4,6 +4,7 @@ import (
 	"os"
 	"fmt"
 	"github.com/yerkebayev/go-final-go/models"
+	"github.com/joho/godotenv"
 	"log"
 
 	"gorm.io/driver/postgres"
@@ -11,6 +12,10 @@ import (
 )
 
 func Init() *gorm.DB {
+
+	if err := godotenv.Load(); err != nil {
+		fmt.Println("NO ENV FILE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	}
 
 	username := os.Getenv("POSTGRES_USER")
 	password := os.Getenv("POSTGRES_PASSWORD")	
